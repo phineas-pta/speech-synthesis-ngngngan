@@ -1,0 +1,21 @@
+_target_: matcha.data.text_mel_datamodule.TextMelDataModule
+name: matcha_ngngngan
+train_filelist_path: ../speech-synthesis-ngngngan/data/99-audio-text-file-list/ngngngan_audio_text_train_filelist.txt
+valid_filelist_path: ../speech-synthesis-ngngngan/data/99-audio-text-file-list/ngngngan_audio_text_val_filelist.txt
+batch_size: 16
+num_workers: 12
+pin_memory: True
+cleaners: [basic_cleaners_ngngngan]
+add_blank: True
+n_spks: 1
+n_fft: 1024
+n_feats: 80
+sample_rate: 22050
+hop_length: 256
+win_length: 1024
+f_min: 0
+f_max: 8000
+data_statistics:  # Computed for ngngngan dataset
+  mel_mean: -4.782978  # ljspeech: -5.536622
+  mel_std: 1.931030    # ljspeech: 2.116101
+seed: ${seed}

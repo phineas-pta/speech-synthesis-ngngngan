@@ -1,0 +1,18 @@
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch
+torchaudio
+
+yt-dlp
+
+pyannote.audio
+demucs
+
+openai-whisper
+pandas
+# pyarrow  # because of pandas v3
+underthesea
+phonemizer  # epitran
+num2words
+
+jupyter-lab
+tensorboard

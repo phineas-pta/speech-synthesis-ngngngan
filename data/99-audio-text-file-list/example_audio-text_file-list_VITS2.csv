@@ -1,0 +1,8 @@
+# example from _all.txt
+rZnygcVV3vI_0002.wav|Họ thay đổi nội dung cốt truyện, thay đổi tốc độ và thậm chí sửa cả tựa của câu truyện,
+
+# example from ███_filelist.txt (3 files train-val-test)
+../speech-synthesis-ngngngan/data/06-subs/rZnygcVV3vI_0002.wav|Họ thay đổi nội dung cốt truyện, thay đổi tốc độ và thậm chí sửa cả tựa của câu truyện,
+
+# example from ███_filelist.txt.cleaned (3 files train-val-test)
+../speech-synthesis-ngngngan/data/06-subs/rZnygcVV3vI_0002.wav|hɔ6 taj ɗo4j no6j zuŋ koɜt̪ tʃwiɛ6n taj ɗo4j t̪oɜk ɗo6 vaː2 tə6m tʃiɜ syə4 kaː4 t̪yə6 kuə4 kə1w tʃwiɛ6n

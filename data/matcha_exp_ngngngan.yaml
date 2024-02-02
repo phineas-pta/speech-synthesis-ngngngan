@@ -1,0 +1,39 @@
+# @package _global_
+
+defaults:
+  - override /data: matcha_ngngngan.yaml
+
+tags: ["matcha_ngngngan"]
+
+run_name: matcha_ngngngan
+
+model:
+  n_vocab: 230
+# symbols count in _symbols.py
+
+trainer:
+  max_epochs: 101  # numbering start at 0
+  check_val_every_n_epoch: 10
+
+test: False  # default is True but need to create new function `test_step`
+# in `matcha/models/baselightningmodule.py` >>> `BaseLightningClass`
+
+extras:
+  ignore_warnings: True
+  enforce_tags: False
+  print_config: False
+
+hydra:
+  run:
+    dir: ${paths.log_dir}/${run_name}
+
+model_summary:
+  max_depth: 1
+
+model_checkpoint:
+  every_n_epochs: 20
+
+logger:
+  tensorboard:
+    version: "0"
+    default_hp_metric: False
