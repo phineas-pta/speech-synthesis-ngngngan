@@ -20,7 +20,7 @@ def update_data(select: str, scale: str, EventAcc: EventAccumulator) -> None:
 		data[f"{select} loss by {scale}"]["value"].append(i.value)
 
 # https://tbparse.readthedocs.io/en/latest/pages/raw.html
-for file in glob("<path to Matcha-TTS>/logs/matcha_ngngngan/tensorboard/version_0/events.out.tfevents.*"):
+for file in glob("<path to Matcha-TTS>/logs/matcha_ngngngan/tensorboard/mel80band/events.out.tfevents.*"):
 	event_acc = EventAccumulator(file)
 	event_acc.Reload()
 	# print(event_acc.Tags())  # to see available monitored values

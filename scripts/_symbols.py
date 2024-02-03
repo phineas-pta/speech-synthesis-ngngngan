@@ -12,6 +12,7 @@ _punctuation = [
 	chr(63),   # ?
 	chr(161),  # ¡
 	chr(191),  # ¿
+	chr(45),   # -
 	chr(8212), # —
 	chr(8230), # …
 	chr(39),   # '
@@ -236,6 +237,7 @@ _letters_ipa = [
 	chr(39),    # '
 	chr(7547),  # ᵻ
 	chr(810),   # ̪
+	chr(865),   # ͡
 ]
 
 # Export all symbols:

@@ -15,7 +15,8 @@ from _constants import AUDIO_TEXT_FILE_LIST_PATH, FIELD_SEP
 if os.name == "nt":
 	from phonemizer.backend.espeak.wrapper import EspeakWrapper
 	EspeakWrapper.set_library(r"C:\Program Files\eSpeak NG\libespeak-ng.dll")
-ESPEAK = EspeakBackend("vi", language_switch="remove-flags")  # auto default to north accent
+ESPEAK = EspeakBackend("vi", preserve_punctuation=True, language_switch="remove-flags", with_stress=True, tie=True)
+# "vi" auto default to north accent
 
 TRANSCRIPTION_FILE = os.path.join(AUDIO_TEXT_FILE_LIST_PATH, "_all.txt")
 RAW_DATA = pd.read_csv(TRANSCRIPTION_FILE, sep=FIELD_SEP, names=["audio", "text"])
@@ -23,15 +24,17 @@ RAW_DATA = pd.read_csv(TRANSCRIPTION_FILE, sep=FIELD_SEP, names=["audio", "text"
 
 CHU_SO = re.compile(r"^\d+\.?\d+$")  # something quirky when transcribe with whisper
 def special_normalize(text: str) -> str:
-	txt = text_normalize(text)
+	txt = text_normalize(text).replace("-", " ")
 	res = []
-	for word in txt.split(" "):
+	for word in txt.split():
 		if word == "%":
 			res.append("phần trăm")
 		elif CHU_SO.match(word) is not None:
 			num = int(word.replace(".", "_"))
 			res.append(num2words(num, lang="vi").replace("nghìn", "ngàn"))  # bác Ngạn người Bắc nhưng đọc khác
-		elif word not in ".,!?&":
+		elif word in ".,;!?":
+			res[-1] += word
+		else:
 			res.append(word)
 	return " ".join(res).strip()
 

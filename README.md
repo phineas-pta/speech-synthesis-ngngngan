@@ -10,7 +10,7 @@ vì lí do bản quyền nên ở đây chỉ có code ko có data, ai muốn th
 
 RVC checkpoints: https://huggingface.co/doof-ferb/rvc-ngngngan
 
-VITS 2 and/or Matcha-TTS checkpoints: *later or maybe never*
+Matcha-TTS checkpoints: https://huggingface.co/doof-ferb/matcha_ngngngan
 
 ## requirements
 
@@ -21,7 +21,7 @@ install `ffmpeg`
 `git clone` this repo
 
 prepare a fresh python env (`venv` or `conda`)<br />
-`pip install torch torchaudio --find-links https://download.pytorch.org/whl/torch_stable.html`<br />
+`pip install torch torchaudio --find-links=https://download.pytorch.org/whl/torch_stable.html`<br />
 optional: `pip install jupyter-lab tensorboard` for visualization<br />
 e.g. `tensorboard --logdir <path to folder containing events.out.tfevents.*>` ⇒ `localhost:6006`
 

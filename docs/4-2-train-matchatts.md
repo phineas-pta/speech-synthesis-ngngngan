@@ -2,8 +2,7 @@
 
 text-to-speech using https://github.com/shivammehta25/Matcha-TTS (model with 18.2 millions parameters)
 
-edit its `Matcha-TTS/requirements.txt` to include `torch` with cuda, `underthesea`, `num2words`, replace `torchvision` with `torchaudio`<br />
-remove `piper_phonemize` to bypass restriction python 3.10
+edit its `Matcha-TTS/requirements.txt` to include `underthesea` + `num2words`, remove `torchvision`, remove `piper_phonemize` to bypass restriction python 3.10
 
 copy my files
 - from `speech-synthesis-ngngngan/scripts/_cleaner.py` to `Matcha-TTS/matcha/text/cleaners.py`
@@ -15,20 +14,20 @@ edit all audio-text file-list: change `../speech-synthesis-ngngngan` to absolute
 
 edit `Matcha-TTS/matcha/cli.py`: change `english_cleaners2` to `basic_cleaners_ngngngan`
 
-install requirements then `pip install -e .`<br />
+run `pip install -e . --find-links=https://download.pytorch.org/whl/torch_stable.html`<br />
 (require MSVC to build Monotonic Alignment Search)
 
-run `python -m matcha.utils.generate_data_statistics -i matcha_ngngngan.yaml` (remember edit file path)<br />
+run `python matcha/utils/generate_data_statistics.py -i matcha_ngngngan.yaml` (remember edit file path)<br />
 get 2 values `mel_mean` &amp; `mel_std` then go back edit file `matcha_ngngngan.yaml` (should be correct already)
 
-train: `python -m matcha.train experiment=matcha_ngngngan`
+train: `python matcha/train.py experiment=matcha_ngngngan`
 
 logs and checkpoints saved in folder `Matcha-TTS/logs/matcha_ngngngan` (configured by me - not default value)
 
-to resume training: add `ckpt_path=logs/matcha_ngngngan/checkpoints/last.ckpt`
+to resume training: add `ckpt_path=logs/matcha_ngngngan/checkpoints/███.ckpt` (must remove `=` character from file name)
 
-export onnx: `python -m matcha.onnx.export matcha.ckpt model.onnx --n-timesteps=10`
+export onnx: `python matcha/onnx/export.py matcha.ckpt model.onnx --n-timesteps=10`
 
-infer with torch: `python -m matcha.cli --checkpoint_path=… --output_folder=outputs --steps=10 --text=…`
+infer with torch: `python matcha/cli.py --vocoder=hifigan_univ_v1 --checkpoint_path=… --output_folder=outputs --steps=10 --text=…`
 
 infer with onnx: original code contains error if use cuda
