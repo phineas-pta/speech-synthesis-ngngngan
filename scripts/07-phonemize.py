@@ -44,4 +44,4 @@ RAW_DATA["ipa"] = ESPEAK.phonemize(RAW_DATA["text"], strip=True)  # njobs throw 
 RAW_DATA["audio"] = RAW_DATA["audio"].radd("../speech-synthesis-ngngngan/data/06-subs/")
 
 SAVE_FILE = os.path.join(AUDIO_TEXT_FILE_LIST_PATH, "_all_normal_ipa.txt")
-RAW_DATA.to_csv(SAVE_FILE, sep=FIELD_SEP, index=False, header=False, encoding="utf-8")
+RAW_DATA.to_csv(SAVE_FILE, sep=FIELD_SEP, index=False, header=False)

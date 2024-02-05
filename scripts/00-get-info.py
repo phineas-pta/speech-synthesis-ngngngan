@@ -28,6 +28,10 @@ with open(DRAFT_FILE, "w", encoding="utf-8") as out_file:
 # see file draft.json to understand how below regex is written
 
 
+# with open(DRAFT_FILE, "r", encoding="utf-8") as f:
+# 	raw_list_vid = json.load(f)
+
+
 # count speakers based from video description
 TXT = "giọng đọc: nguyễn ngọc ngạn"
 count2 = re.compile(rf"\n{TXT}(,| &)[^,&\n]+\n")
@@ -48,9 +52,11 @@ def count_speakers(txt: str) -> int:
 
 for el in raw_list_vid.values():
 	el["speakers_count"] = count_speakers(el["description"])
+	el["is_audiobook"] = "giọng đọc:" in el["description"].lower()
 
 
 # manual correction
+raw_list_vid["Ov3o1GIImZM"]["is_audiobook"] = True
 for id in [
 	"hoNGMejbF20", "IeDjubTdvXY", "m4N42aD6Twg", "9OvlclzngLY", "ZJiM8YGHDPQ",
 	"ELbEiuSHSoE", "-7aAnBs8WQc", "CDlujtWFuJE", "DW3aBHcOdW0", "j8YV2HtDZxA",

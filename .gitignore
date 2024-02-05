@@ -1,4 +1,6 @@
 draft.*
+data/**/*.webm
+data/**/*.webm.part
 data/**/*.wav
 data/**/*.txt
 data/**/*.txt.cleaned

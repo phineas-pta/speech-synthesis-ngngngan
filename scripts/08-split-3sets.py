@@ -31,8 +31,8 @@ idx_train = int(N * TRAIN_SIZE)
 idx_val   = int(N * (TRAIN_SIZE + VAL_SIZE))
 
 def save_csv(df: pd.DataFrame, filename: str) -> None:
-	df.to_csv(filename,            columns=["audio", "text"], sep=FIELD_SEP, index=False, header=False, encoding="utf-8")
-	df.to_csv(filename+".cleaned", columns=["audio",  "ipa"], sep=FIELD_SEP, index=False, header=False, encoding="utf-8")
+	df.to_csv(filename,            columns=["audio", "text"], sep=FIELD_SEP, index=False, header=False)
+	df.to_csv(filename+".cleaned", columns=["audio",  "ipa"], sep=FIELD_SEP, index=False, header=False)
 
 save_csv(DATA.iloc[:idx_train, :],      TRAIN_SET_FILE)
 save_csv(DATA.iloc[idx_train:idx_val, :], VAL_SET_FILE)

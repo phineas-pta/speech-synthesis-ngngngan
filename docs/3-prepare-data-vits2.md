@@ -9,12 +9,12 @@ the article above, dated from 2019, uses google API for speech recognition and t
 in this project, i’ll use more recent end-to-end models with transformers architecture, possible template: https://github.com/NTT123/light-speed
 
 SOTA models at the time of writing:
-- P-Flow TTS: https://github.com/p0p4k/pflowtts_pytorch (still seem unstable)
+- P-Flow TTS: https://github.com/p0p4k/pflowtts_pytorch (still seem unstable, got sudden crash)
 - Matcha-TTS: https://github.com/shivammehta25/Matcha-TTS (seem easier to start)
 - VITS 2: https://github.com/p0p4k/vits2_pytorch (seem easier to start)
-- XTTS 2: https://github.com/coqui-ai/TTS/blob/dev/recipes/ljspeech/xtts_v2/train_gpt_xtts.py (don’t know to add language)
+- XTTS 2: https://github.com/coqui-ai/TTS/blob/dev/recipes/ljspeech/xtts_v2/train_gpt_xtts.py (don’t know how to add language)
 - StyleTTS 2: https://github.com/yl4579/StyleTTS2 (config more complicated)
-- VALL-E: https://github.com/Plachtaa/VALL-E-X (don’t know to add language)
+- VALL-E: https://github.com/Plachtaa/VALL-E-X (don’t know how to add language)
 - VoiceFlow-TTS: https://github.com/X-LANCE/VoiceFlow-TTS (config more complicated)
 
 ### 6. transcribe
@@ -54,3 +54,15 @@ audio-text file-list save as `data/99-audio-text-file-list/_all_normal_ipa.txt`
 `python scripts/08-split-3sets.py`
 
 6 audio-text file-list save to folder `data/99-audio-text-file-list`
+
+excerpt of audio-text file-list:
+```
+# example from _all.txt
+rZnygcVV3vI_0002.wav|Họ thay đổi nội dung cốt truyện, thay đổi tốc độ và thậm chí sửa cả tựa của câu truyện,
+
+# example from ███_filelist.txt (3 files train-val-test)
+../speech-synthesis-ngngngan/data/06-subs/rZnygcVV3vI_0002.wav|Họ thay đổi nội dung cốt truyện, thay đổi tốc độ và thậm chí sửa cả tựa của câu truyện,
+
+# example from ███_filelist.txt.cleaned (3 files train-val-test)
+../speech-synthesis-ngngngan/data/06-subs/rZnygcVV3vI_0002.wav|hˈɔ6 tˈaj ɗˈo4j nˈo6j zˈuŋ kˈoɜt̪ t͡ʃwˈi͡ɛ6n, tˈaj ɗˈo4j t̪ˈoɜk ɗˈo6 vˌaː2 tˈə6m t͡ʃˈiɜ sˈy͡ə4 kˈaː4 t̪ˈy͡ə6 kˌu͡ə4 kˈə1w t͡ʃwˈi͡ɛ6n,
+```

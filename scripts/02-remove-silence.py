@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""remove silence using Silero VAD"""
+"""remove silence and non-speech using Silero VAD"""
 # see https://github.com/snakers4/silero-vad/wiki/Examples-and-Dependencies
 # also https://github.com/snakers4/silero-vad/blob/master/utils_vad.py
 

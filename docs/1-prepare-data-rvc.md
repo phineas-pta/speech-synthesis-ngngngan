@@ -16,7 +16,7 @@ for simplicity, **download only audio with 1 speaker** so after remove silence c
 
 audios are saved as `.wav` files in folder `data/01-raw`
 
-### 2. remove silence
+### 2. remove silence and non-speech
 
 using SileroVAD: `python scripts/02-remove-silence.py`
 

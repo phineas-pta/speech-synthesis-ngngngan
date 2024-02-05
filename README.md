@@ -12,6 +12,8 @@ RVC checkpoints: https://huggingface.co/doof-ferb/rvc-ngngngan
 
 Matcha-TTS checkpoints: https://huggingface.co/doof-ferb/matcha_ngngngan
 
+Demo: Matcha-TTS 🤗 https://huggingface.co/spaces/doof-ferb/MatchaTTS_ngngngan
+
 ## requirements
 
 need NVIDIA GPU
@@ -44,6 +46,5 @@ or directly run `pip install -r requirements.txt` but it may not be up-to-date
 ```
 git update-index --skip-worktree data/vits2_ngngngan_nosdp.json
 git update-index --skip-worktree tensorboard/export_tensorboard_RVC.py
-git update-index --skip-worktree tensorboard/export_tensorboard_VITS2.py
 git update-index --skip-worktree tensorboard/export_tensorboard_MatchaTTS.py
 ```

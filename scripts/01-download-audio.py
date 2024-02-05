@@ -9,7 +9,7 @@ from yt_dlp import YoutubeDL
 from _constants import LIST_VID, RAW_DATA_PATH
 
 list_vid = dict(filter(
-	lambda el: el[1]["speakers_count"] == 1,
+	lambda el: el[1]["speakers_count"] == 1,  # el[1]["speakers_count"] == 2 and not el[1]["is_audiobook"],
 	LIST_VID.items()
 ))
 
@@ -25,4 +25,5 @@ YDL_OPTS = {
 }
 
 with YoutubeDL(YDL_OPTS) as ydl:
+	print("download", len(list_vid), "files")
 	ydl.download(list(list_vid.keys()))
