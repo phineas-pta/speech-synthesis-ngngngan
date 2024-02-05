@@ -19,6 +19,8 @@ MODEL.decoder = torch.quantization.quantize_dynamic(MODEL.decoder, qconfig_spec=
 
 
 HALLUCINATIONS_TEXT = "hãy subscribe cho kênh ghiền mì gõ để không bỏ lỡ những video hấp dẫn"
+
+@torch.inference_mode()
 def transcribe(infile: str) -> list[dict]:
 	"""transcribe, and if get non-sense transcribe again"""
 	res = MODEL.transcribe(infile, verbose=False, language="vi")["segments"]  # verbose=False to show progress bar
@@ -70,6 +72,8 @@ for id in LIST_VID.keys():
 		with open(TRANSCRIPTION_FILE, mode="a", encoding="utf-8") as f:
 			cut_audio_and_save_text(infile, res_trans, id, SUBS_DATA_PATH, f)
 		# with this i can follow and verify spelling in near real-time
-		# to check for hallucination unnoticed and spelling (e.g. d-gi, r-d, tr-ch, …)
+		# to check for hallucination unnoticed and spelling (e.g. r-d-gi, tr-ch, …)
 
 # risk of hallucinations: to verify in detail: m4N42aD6Twg ELbEiuSHSoE CDlujtWFuJE gp2mK345es0 KpNxXYPYm0I ZbKrts2AtYQ
+# ATTENTION: timestamp mismatch: j8YV2HtDZxA p6Pjce5khIY
+# ATTENTION: singing: ZbKrts2AtYQ

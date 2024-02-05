@@ -4,6 +4,7 @@
 """separate voice with demucs"""
 
 import os
+import torch
 from glob import glob
 
 # see https://github.com/facebookresearch/demucs/blob/release_v4/demucs/separate.py
@@ -24,12 +25,12 @@ def isolate_voice(infile: str, outfile: str) -> None:
 	audio_ref = audio.mean(0)
 	avg, std = audio_ref.mean(), audio_ref.std()
 	audio = (audio - avg) / std  # overwrite object to save memory
-	sources = apply_model(
-		MODEL, audio[None], device="cuda", split=True, progress=True
-	).squeeze()[IJK]  # keep only vocal stem to save memory
+	with torch.inference_mode():
+		sources = apply_model(MODEL, audio[None], device="cuda", split=True, progress=True).squeeze()[IJK]
+		# keep only vocal stem to save memory
+	torch.cuda.empty_cache()
 	sources = sources * std + avg
 	save_audio(wav=sources, path=outfile, samplerate=MODEL.samplerate)
-	# torch.cuda.empty_cache()
 
 
 #################################### main #####################################

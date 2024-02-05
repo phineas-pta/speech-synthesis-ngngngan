@@ -36,12 +36,13 @@ MODEL_CONFIG = GenerationConfig(
 	eos_token_id=TOKENIZER.eos_token_id, pad_token_id=TOKENIZER.pad_token_id,
 )
 
+@torch.inference_mode()
 def sua_chinh_ta(txt: str) -> str:
-	text = "### Câu hỏi: Sửa lỗi chính tả:\n" + txt + "\n### Trả lời:"
+	text = f"### Câu hỏi: Sửa lỗi chính tả:\n{txt}\n### Trả lời:"
 	input_ids = TOKENIZER(text, return_tensors="pt").to(MODEL.device)
 	out_ids = MODEL.generate(**input_ids, generation_config=MODEL_CONFIG)
 	answer = TOKENIZER.batch_decode(out_ids, skip_special_tokens=True)[0]
-	return answer.strip().split("### Trả lời:")[-1]
+	return answer.split("### Trả lời:")[-1].strip()
 
 RAW_DATA["new_text"] = [sua_chinh_ta(txt) for txt in tqdm(RAW_DATA["text"])]  # RAW_DATA["text"].map(sua_chinh_ta) but no progress bar
 RAW_DATA.to_csv("_all_test.txt", columns=["audio",  "new_text"], sep="|", index=False, header=False, encoding="utf-8")

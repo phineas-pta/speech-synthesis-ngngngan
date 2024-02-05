@@ -30,7 +30,6 @@ def cut_equal(infile: str, outdir: str, duration=1800) -> None:  # 1800sec = 30m
 			bits_per_sample=audio_file["bits_per_sample"],
 			encoding=audio_file["encoding"]
 		)
-	# torch.cuda.empty_cache()
 
 
 def diarize(audio_dict: dict[str, int | str | torch.Tensor], speakers_count: int) -> list[dict[str, int | str]]:
@@ -38,8 +37,9 @@ def diarize(audio_dict: dict[str, int | str | torch.Tensor], speakers_count: int
 	input = output of load_audio()
 	output = list of segments (start, end, speaker id)
 	"""
-	with ProgressHook() as hook:
+	with torch.inference_mode(), ProgressHook() as hook:
 		diarization = MODEL(audio_dict, hook=hook, num_speakers=speakers_count)
+	torch.cuda.empty_cache()
 	raw_seg_list = []
 	for turn, _, speaker in diarization.itertracks(yield_label=True):
 		# print(f"start={turn.start:.1f}s stop={turn.end:.1f}s {speaker}")

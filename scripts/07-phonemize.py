@@ -22,6 +22,7 @@ TRANSCRIPTION_FILE = os.path.join(AUDIO_TEXT_FILE_LIST_PATH, "_all.txt")
 RAW_DATA = pd.read_csv(TRANSCRIPTION_FILE, sep=FIELD_SEP, names=["audio", "text"])
 
 
+NAM_20xx = re.compile(r"^20\d{2}$")
 CHU_SO = re.compile(r"^\d+\.?\d+$")  # something quirky when transcribe with whisper
 def special_normalize(text: str) -> str:
 	txt = text_normalize(text).replace("-", " ")
@@ -29,9 +30,12 @@ def special_normalize(text: str) -> str:
 	for word in txt.split():
 		if word == "%":
 			res.append("phần trăm")
+		elif NAM_20xx.match(word) is not None:  # bác Ngạn đọc hơi đặc biệt
+			num = "hai ngàn không trăm " + num2words(int(word[-2:]), lang="vi")
+			res.append(num)
 		elif CHU_SO.match(word) is not None:
-			num = int(word.replace(".", "_"))
-			res.append(num2words(num, lang="vi").replace("nghìn", "ngàn"))  # bác Ngạn người Bắc nhưng đọc khác
+			num = num2words(int(word.replace(".", "_")), lang="vi")
+			res.append(num.replace("nghìn", "ngàn"))  # bác Ngạn người Bắc nhưng đọc khác
 		elif word in ".,;!?":
 			res[-1] += word
 		else:

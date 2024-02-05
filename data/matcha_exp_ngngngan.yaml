@@ -8,12 +8,14 @@ tags: ["matcha_ngngngan"]
 run_name: matcha_ngngngan
 
 model:
-  n_vocab: 231
+  n_vocab: 230
 # symbols count in _symbols.py
 
 trainer:
-  max_epochs: 241  # numbering start at 0
-  check_val_every_n_epoch: 10
+  max_epochs: 320
+  check_val_every_n_epoch: 5
+
+# ckpt_path: logs/matcha_ngngngan/checkpoints/checkpoint_epoch███.ckpt
 
 test: False  # default is True but need to create new function `test_step`
 # in `matcha/models/baselightningmodule.py` >>> `BaseLightningClass`

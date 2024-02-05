@@ -28,7 +28,7 @@ audios saved in folder `data/06-subs`, convert from dual to mono channel, downsa
 
 audio-text file-list save as `data/99-audio-text-file-list/_all.txt` ⇐ manually skim through to check for hallucination unnoticed
 
-*lost 37’ audio because `whisper` hallucinate, eventhough already used SileroVAD*
+*lost 47’ audio because singing + `whisper` hallucinate, eventhough already used SileroVAD*
 
 ### 7. phonemize
 
@@ -66,3 +66,5 @@ rZnygcVV3vI_0002.wav|Họ thay đổi nội dung cốt truyện, thay đổi t�
 # example from ███_filelist.txt.cleaned (3 files train-val-test)
 ../speech-synthesis-ngngngan/data/06-subs/rZnygcVV3vI_0002.wav|hˈɔ6 tˈaj ɗˈo4j nˈo6j zˈuŋ kˈoɜt̪ t͡ʃwˈi͡ɛ6n, tˈaj ɗˈo4j t̪ˈoɜk ɗˈo6 vˌaː2 tˈə6m t͡ʃˈiɜ sˈy͡ə4 kˈaː4 t̪ˈy͡ə6 kˌu͡ə4 kˈə1w t͡ʃwˈi͡ɛ6n,
 ```
+
+**GIVE UP on VITS2 because training too long, switch to Matcha-TTS much faster**

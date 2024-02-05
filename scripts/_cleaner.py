@@ -14,6 +14,7 @@ if platform.system().lower() == "windows":
 _ESPEAK = EspeakBackend("vi", preserve_punctuation=True, language_switch="remove-flags", with_stress=True, tie=True)
 # "vi" auto default to north accent
 
+_NAM_20xx = re.compile(r"^20\d{2}$")
 _CHU_SO = re.compile(r"^\d+$")
 
 
@@ -26,6 +27,9 @@ def basic_cleaners_ngngngan(text: str) -> str:
 			text_list.extend(["phần", "trăm"])
 		elif word == "&":
 			text_list.append("và")
+		elif _NAM_20xx.match(word) is not None:  # bác Ngạn đọc hơi đặc biệt
+			num = "hai ngàn không trăm " + num2words(int(word[-2:]), lang="vi")
+			text_list.append(num.split(" "))
 		elif _CHU_SO.match(word) is not None:
 			num = num2words(int(word), lang="vi").replace("nghìn", "ngàn")  # bác Ngạn người Bắc nhưng đọc khác
 			text_list.extend(num.split(" "))

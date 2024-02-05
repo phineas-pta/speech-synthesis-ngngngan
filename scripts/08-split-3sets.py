@@ -20,7 +20,7 @@ VAL_SET_FILE   = os.path.join(AUDIO_TEXT_FILE_LIST_PATH, "ngngngan_audio_text_va
 TEST_SET_FILE  = os.path.join(AUDIO_TEXT_FILE_LIST_PATH, "ngngngan_audio_text_test_filelist.txt")
 
 # somewhat arbitrary split
-N = len(DATA)  # 6.8k samples (≈ 5h audio)
+N = len(DATA)  # 6.6k samples (≈ 4h50min audio)
 TRAIN_SIZE = .85  # 85%
 VAL_SIZE   = .1
 TEST_SIZE  = .05

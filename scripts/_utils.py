@@ -4,7 +4,7 @@ from torchaudio import load as _load_file, info as _read_info, save as _save_fil
 from torchaudio.functional import resample as _resample
 
 
-def load_audio(filepath: str) -> dict:
+def load_audio(filepath: str) -> dict:  # dict[str, int | str | torch.Tensor]
 	"""return the format required by pyannote pipeline"""
 	waveform, sample_rate = _load_file(filepath)
 	metadata = _read_info(filepath)
