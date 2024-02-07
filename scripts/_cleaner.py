@@ -8,7 +8,7 @@ from underthesea import text_normalize
 from phonemizer.backend import EspeakBackend
 from num2words import num2words  # espeak has num2word built-in but it sucks
 
-if platform.system().lower() == "windows":
+if platform.system().lower() == "windows" and not EspeakBackend.is_available():
 	from phonemizer.backend.espeak.wrapper import EspeakWrapper
 	EspeakWrapper.set_library(r"C:\Program Files\eSpeak NG\libespeak-ng.dll")
 _ESPEAK = EspeakBackend("vi", preserve_punctuation=True, language_switch="remove-flags", with_stress=True, tie=True)

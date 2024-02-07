@@ -8,11 +8,14 @@ tags: ["matcha_ngngngan"]
 run_name: matcha_ngngngan
 
 model:
-  n_vocab: 230
-# symbols count in _symbols.py
+  n_vocab: 230  # symbols count in _symbols.py
+  # decoder:  # possible improvement if increase decoder params count (3×)
+    # channels: [512, 512]     # default: 256
+    # attention_head_dim: 128  # default: 64
+  # remember to decrease batch size
 
 trainer:
-  max_epochs: 320
+  max_epochs: 600
   check_val_every_n_epoch: 5
 
 # ckpt_path: logs/matcha_ngngngan/checkpoints/checkpoint_epoch███.ckpt

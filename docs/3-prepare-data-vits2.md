@@ -40,7 +40,7 @@ attempt to use other phonemizer but not work because IPA output incompatible:
 - `from underthesea.pipeline.ipa import viet2ipa`: accurate but can only process word, not cover all vocab, silently throw empty string
 - `from epitran import Epitran`: very fast but bad accuracy
 
-⇒ must use `phonemizer` with `espeak` backend to be compatible with existing training scripts found in popular repo
+⇒ must use `phonemizer` with `espeak` backend (doesn’t use tone letters so incompatible with `underthesea`) to be compatible with existing training scripts found in popular repo
 
 install `espeak`: https://github.com/espeak-ng/espeak-ng/blob/master/docs/guide.md
 ```

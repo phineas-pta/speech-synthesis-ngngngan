@@ -26,11 +26,7 @@ logs and checkpoints saved in folder `Matcha-TTS/logs/matcha_ngngngan` (configur
 
 to resume training: add `ckpt_path=logs/matcha_ngngngan/checkpoints/checkpoint_epoch███.ckpt` (must rename file to remove `=` character)
 
-export onnx: `python matcha/onnx/export.py matcha.ckpt model.onnx --n-timesteps=10`
-
-infer with torch: `python matcha/cli.py --vocoder=hifigan_univ_v1 --checkpoint_path=… --output_folder=outputs --steps=10 --text=…`
-
-infer with onnx: original code contains error if use cuda
+for inference: use my fork (having CLI & gradio GUI): https://github.com/phineas-pta/MatchaTTS_ngngngan
 
 ### trim down checkpoint
 
@@ -38,13 +34,18 @@ default `pytorch lightning` setting: `save_weights_only: false` to resume traini
 
 after finish training, keep bare minimum data in checkpoint:
 ```python
-import os, glob, torch
-CKPT_DIR = os.path.join("logs", "matcha_ngngngan", "checkpoints")
+from os.path import join, splitext
+from glob import glob
+from tqdm import tqdm
+from torch import load, save
+
+CKPT_DIR = join("logs", "matcha_ngngngan", "checkpoints")
 REQUIRED_INFO = ("state_dict", "hyper_parameters", "epoch", "pytorch-lightning_version")
-for f in glob.glob("*.ckpt", root_dir=CKPT_DIR):
-	infile = os.path.join(CKPT_DIR, f)
-	outfile = os.path.splitext(infile)[0] + "_slim.pt"
-	yolo = torch.load(infile)
+
+for f in tqdm(glob("*.ckpt", root_dir=CKPT_DIR)):
+	infile = join(CKPT_DIR, f)
+	outfile = splitext(infile)[0] + "_slim.pt"
+	yolo = load(infile)
 	# print(list(yolo.keys()))
-	torch.save({k: yolo[k] for k in REQUIRED_INFO}, outfile)
+	save({k: yolo[k] for k in REQUIRED_INFO}, outfile)
 ```

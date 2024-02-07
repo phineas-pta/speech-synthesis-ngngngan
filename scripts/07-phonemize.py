@@ -12,7 +12,7 @@ from num2words import num2words  # espeak has num2word built-in but it sucks
 
 from _constants import AUDIO_TEXT_FILE_LIST_PATH, FIELD_SEP
 
-if os.name == "nt":
+if os.name == "nt" and not EspeakBackend.is_available():
 	from phonemizer.backend.espeak.wrapper import EspeakWrapper
 	EspeakWrapper.set_library(r"C:\Program Files\eSpeak NG\libespeak-ng.dll")
 ESPEAK = EspeakBackend("vi", preserve_punctuation=True, language_switch="remove-flags", with_stress=True, tie=True)
